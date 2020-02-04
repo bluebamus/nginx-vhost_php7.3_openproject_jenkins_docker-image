@@ -1,6 +1,8 @@
 # nginx-vhost_php7.3_openproject_jenkins_docker-image
 > [nginx-vhost-php7.3] 에서 제공하는 솔루션에 OpenProject, Jenkins를 결합한 솔루션
 
+> 함께 제공되는 nginx/php7.3 가상 호스팅 운영 방법은 [nginx-vhost-php7.3] 에서 확인
+
 ## 서비스 특징
  
 > [OpenProject] : 프로젝트 관리 프로세스(PMI)를 지원 하는 오픈 소스 프로젝트 관리 소프트웨어
@@ -15,7 +17,7 @@
       open.test.com으로 오픈프로젝트를 운영,
       jen.test.com으로 jenkins를 운영할 수 있음
 
-## 사용 방법
+## 사용 방법 (OpenProject) : 도메인 적용
 
 1. OpenProject 사용시 이벤트를 메일로 보내기 위해 메일 계정 정보를 필수로 요구함
 
@@ -36,8 +38,62 @@ environment:
       SMTP_PASSWORD: "1234567890067655abcdefgh" #key 정보
 ```
 
+2. log의 supervisor 폴더가 volumes 로 연동되어있어 log 파일을 실시간 확인 가능
+
+3. config 폴더의 nginx_proxy_conf.sh 파일을 사용하여 nginx의 proxy 연결을 위한 conf 파일 생성
+
+```sh
+
+account : 식별할 수 있는 파일명
+domain : 연결할 도메인 명
+
+#!/bin/bash
+
+account=$1
+domain=$2
+portnumber='80'
+realurl='http:\/\/openproject:8080'
+
+sed 's/realurl;/'$realurl';/' sample_nginx_proxy.conf > $account'1'.temp
+sed 's/portnumber;/'$portnumber';/' $account'1'.temp > $account'2'.temp
+sed 's/domain/'$domain'/g' $account'2'.temp > ./conf.d/$account'_proxy_ng'.conf
+
+rm *.temp
+```
+
+```sh
+사용 예시 
+nginx_proxy_conf.sh open_test open.test.com
+
+결과물 
+open_test_proxy_ng.conf
+```
+
+3. 방화벽 설정
+
+```sh
+ufw를 사용하고 있는 경우 80과 443 포트를 열어줌
+예) ufw allow 80/tcp
+    ufw allow 443/tcp
+```
+
+4. Docker-compose 실행
+
+```sh
+compose/nginx_openproject 폴더 위치로 이동하여 docker-compose.yml 파일이 있는 곳에서
+docker-compose up -d 실행
+```
+
+## 사용 방법 (Jenkins) 1 : ip 접근
+
+```sh
+compose/nginx_jenkins 폴더에서 docker-compose up -d 실행
+
+```
 
 
+
+## 사용 방법 (Jenkins) 2 : 도메인 접근
 
 
 
