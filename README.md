@@ -3,7 +3,8 @@
 
 > 함께 제공되는 nginx/php7.3 가상 호스팅 운영 방법은 [nginx-vhost-php7.3] 에서 확인
 
-> 가상 호스팅, openproject, jenkins 모든 서비스를 도메인을 통해 단일 nginx 서버로 운영하고자 한다면
+> 가상 호스팅, openproject, jenkins 모든 서비스를  도메인을 통해 단일 nginx 서버로 운영하고자 한다면
+  compose/full_service 폴더의 docker-compose.yml을 사용
 
 ## 서비스 특징
  
@@ -91,9 +92,11 @@ docker-compose up -d 실행
 ```sh
 compose/nginx_jenkins 폴더에서 docker-compose up -d 실행
 
+ip:8100 으로 접근 가능
+
+* 방화벽 수정 : 예) ufw allow 8100/tcp
+
 ```
-
-
 
 ## 사용 방법 (Jenkins) 2 : 도메인 접근
 
