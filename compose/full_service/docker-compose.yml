@@ -48,3 +48,12 @@ services:
     expose:
       - "8080"   
     restart: always
+
+  jenkins:
+    image: jenkins/jenkins:latest
+    container_name: jenkins
+    restart: always
+    volumes:
+      - ./jenkins_home:/var/jenkins_home
+    environment:
+      TZ: "Asia/Seoul"
