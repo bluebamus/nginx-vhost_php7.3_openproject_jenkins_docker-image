@@ -3,6 +3,8 @@
 
 > 함께 제공되는 nginx/php7.3 가상 호스팅 운영 방법은 [nginx-vhost-php7.3] 에서 확인
 
+> 가상 호스팅, openproject, jenkins 모든 서비스를 도메인을 통해 단일 nginx 서버로 운영하고자 한다면
+
 ## 서비스 특징
  
 > [OpenProject] : 프로젝트 관리 프로세스(PMI)를 지원 하는 오픈 소스 프로젝트 관리 소프트웨어
