@@ -47,26 +47,29 @@ environment:
 
 ```sh
 
-account : 식별할 수 있는 파일명
+account : 식별할 수 있는 파일명, 로그 파일명
 domain : 연결할 도메인 명
+portnumber : 웹 서비스 포트
+realurl : 프록시로 연결될 주소 및 포트 정보
 
 #!/bin/bash
 
 account=$1
 domain=$2
-portnumber='80'
-realurl='http:\/\/openproject:8080'
+portnumber=$3
+realurl='http:\/\/'$4':'$5
 
 sed 's/realurl;/'$realurl';/' sample_nginx_proxy.conf > $account'1'.temp
 sed 's/portnumber;/'$portnumber';/' $account'1'.temp > $account'2'.temp
-sed 's/domain/'$domain'/g' $account'2'.temp > ./conf.d/$account'_proxy_ng'.conf
+sed 's/domain/'$domain'/g' $account'2'.temp > ./conf.d/$account'_proxy_ng'.conf 
 
 rm *.temp
 ```
 
 ```sh
 사용 예시 
-nginx_proxy_conf.sh open_test open.test.com
+nginx_proxy_conf.sh '파일명 & 로그파일명' '도메인' '웹 서비스 포트' 'docker 컨테이너 이름' 'docker 컨테이너 서비스 포트'
+예시) nginx_proxy_conf.sh open_test open.test.com 80 jenkins 8080
 
 결과물 
 open_test_proxy_ng.conf
@@ -100,7 +103,52 @@ ip:8100 으로 접근 가능
 
 ## 사용 방법 (Jenkins) 2 : 도메인 접근
 
+1. config 폴더의 nginx_proxy_conf.sh 파일을 사용하여 nginx의 proxy 연결을 위한 conf 파일 생성
 
+```sh
+
+account : 식별할 수 있는 파일명, 로그 파일명
+domain : 연결할 도메인 명
+portnumber : 웹 서비스 포트
+realurl : 프록시로 연결될 주소 및 포트 정보
+
+#!/bin/bash
+
+account=$1
+domain=$2
+portnumber=$3
+realurl='http:\/\/'$4':'$5
+
+sed 's/realurl;/'$realurl';/' sample_nginx_proxy.conf > $account'1'.temp
+sed 's/portnumber;/'$portnumber';/' $account'1'.temp > $account'2'.temp
+sed 's/domain/'$domain'/g' $account'2'.temp > ./conf.d/$account'_proxy_ng'.conf 
+
+rm *.temp
+```
+
+```sh
+사용 예시 
+nginx_proxy_conf.sh '파일명 & 로그파일명' '도메인' '웹 서비스 포트' 'docker 컨테이너 이름' 'docker 컨테이너 서비스 포트'
+예시) nginx_proxy_conf.sh open_test open.test.com 80 jenkins 8080
+
+결과물 
+open_test_proxy_ng.conf
+```
+
+3. 방화벽 설정
+
+```sh
+ufw를 사용하고 있는 경우 80과 443 포트를 열어줌
+예) ufw allow 80/tcp
+    ufw allow 443/tcp
+```
+
+4. Docker-compose 실행
+
+```sh
+compose/nginx_openproject 폴더 위치로 이동하여 docker-compose.yml 파일이 있는 곳에서
+docker-compose up -d 실행
+```
 
 
 ## 사용 예제
