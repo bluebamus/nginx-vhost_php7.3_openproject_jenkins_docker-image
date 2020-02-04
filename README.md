@@ -3,9 +3,9 @@
 
 ## 서비스 특징
  
-> [OpenProject] 는 프로젝트 관리 프로세스(PMI)를 지원 하는 오픈 소스 프로젝트 관리 소프트웨어
+> [OpenProject] : 프로젝트 관리 프로세스(PMI)를 지원 하는 오픈 소스 프로젝트 관리 소프트웨어
 
-> [Jenkins] CI 툴 중 하나로 CI (Continuous Integration)는 개발자가 공유 버전 제어 저장소에서 
+> [Jenkins] : CI 툴 중 하나로 CI (Continuous Integration)는 개발자가 공유 버전 제어 저장소에서 
   팀의 코드를 컴파일 할 수 있도록함으로써 빌드주기 비 효율성을 줄이기 위한 프로세스
 
 > nginx/php7.3 기반의 가상 호스팅, OpenProject, Jenkins를 개별 서버로 사용할 수 있고 
