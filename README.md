@@ -121,7 +121,7 @@ ip:8100 으로 접근 가능
 
 * 차후 업데이트 계획 :   
   - OpenObject와 젠킨스의 DB를 docker-compose.yml의 volumes 설정으로 컨테이너의 문제 발생시 데이터 복구 방안 제공
-  - OpenObject와 젠킨스의 DB를 외부에서 운영할 수 있도록 기존 docker 설정 업데이
+  - OpenObject와 젠킨스의 DB를 외부에서 운영할 수 있도록 기존 docker 설정 업데이트 
  
 ## 신규 repository 계획
  - git-server, docker-image의 독립 서버들을 결합하여 신규 repository로 제공 예정  
