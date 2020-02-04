@@ -2,8 +2,8 @@
 
 account=$1
 domain=$2
-portnumber='80'
-realurl='http:\/\/openproject:8080'
+portnumber=$3
+realurl='http:\/\/'$4':'$5
 
 sed 's/realurl;/'$realurl';/' sample_nginx_proxy.conf > $account'1'.temp
 sed 's/portnumber;/'$portnumber';/' $account'1'.temp > $account'2'.temp
