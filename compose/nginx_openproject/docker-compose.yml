@@ -24,7 +24,7 @@ services:
     image: nginx:latest
     container_name: nginx-proxy
     volumes:
-      - ../../config/conf.d/test.devspoon_ng.conf:/etc/nginx/conf.d/test.devspoon_ng.conf          
+      - ../../config/sites-available/test.devspoon_ng.conf:/etc/nginx/sites-available/test.devspoon_ng.conf          
       - ../../config/nginx_conf/nginx.conf:/etc/nginx/nginx.conf
       - ../../config/fastcgi/fastcgi_params:/etc/nginx/fastcgi_params
       - ../../nginx_cache/:/etc/nginx/cache/
