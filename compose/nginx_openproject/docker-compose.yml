@@ -18,6 +18,8 @@ services:
       - ./static/:/var/openproject/assets/
     expose:
       - "8080"
+    environment:
+      TZ: "Asia/Seoul"
     restart: always
 
   nginx-proxy:
@@ -33,6 +35,8 @@ services:
     ports:
       - "80:80"
       - "443:443"
+    environment:
+      TZ: "Asia/Seoul"
     restart: always
     depends_on:
       - openproject
